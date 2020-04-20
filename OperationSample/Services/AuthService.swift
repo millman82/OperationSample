@@ -9,5 +9,5 @@
 import Foundation
 
 protocol AuthService {
-    func getToken()
+    func getToken(completion: (String) -> Void)
 }

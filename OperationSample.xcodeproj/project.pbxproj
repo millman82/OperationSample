@@ -22,6 +22,7 @@
 		2799871B2446862A0076789C /* OAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2799871A2446862A0076789C /* OAuthService.swift */; };
 		2799871E244689E10076789C /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2799871D244689E10076789C /* Token.swift */; };
 		27BA05BA2447B98D008D7621 /* DiscoveryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA05B92447B98D008D7621 /* DiscoveryService.swift */; };
+		27BA05BD244D57BA008D7621 /* SceneDelegate+ASWebAuthentcationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA05BC244D57BA008D7621 /* SceneDelegate+ASWebAuthentcationSession.swift */; };
 		27C7F041244764140024BCA6 /* LoginWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C7F040244764140024BCA6 /* LoginWebViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		2799871A2446862A0076789C /* OAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthService.swift; sourceTree = "<group>"; };
 		2799871D244689E10076789C /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		27BA05B92447B98D008D7621 /* DiscoveryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryService.swift; sourceTree = "<group>"; };
+		27BA05BC244D57BA008D7621 /* SceneDelegate+ASWebAuthentcationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+ASWebAuthentcationSession.swift"; sourceTree = "<group>"; };
 		27C7F040244764140024BCA6 /* LoginWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,12 +125,13 @@
 		27983C7B2445814900F55FC9 /* OperationSample */ = {
 			isa = PBXGroup;
 			children = (
+				27983C7C2445814900F55FC9 /* AppDelegate.swift */,
 				27C7F03F244763F20024BCA6 /* Login */,
 				2799871C244689D30076789C /* Models */,
 				277FB12024476810006D17CF /* Options */,
 				27998717244685A00076789C /* Services */,
-				27983C7C2445814900F55FC9 /* AppDelegate.swift */,
 				27983C7E2445814900F55FC9 /* SceneDelegate.swift */,
+				27BA05BC244D57BA008D7621 /* SceneDelegate+ASWebAuthentcationSession.swift */,
 				27983C802445814900F55FC9 /* ViewController.swift */,
 				27983C822445814900F55FC9 /* Main.storyboard */,
 				27983C852445814B00F55FC9 /* Assets.xcassets */,
@@ -320,6 +323,7 @@
 				27C7F041244764140024BCA6 /* LoginWebViewController.swift in Sources */,
 				277FB12224476823006D17CF /* OAuthOptions.swift in Sources */,
 				27983C7D2445814900F55FC9 /* AppDelegate.swift in Sources */,
+				27BA05BD244D57BA008D7621 /* SceneDelegate+ASWebAuthentcationSession.swift in Sources */,
 				277FB12424476D11006D17CF /* OAuthDiscoveryService.swift in Sources */,
 				2799871B2446862A0076789C /* OAuthService.swift in Sources */,
 				27BA05BA2447B98D008D7621 /* DiscoveryService.swift in Sources */,
