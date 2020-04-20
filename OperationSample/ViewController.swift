@@ -22,6 +22,9 @@ class ViewController: UIViewController {
         scope: "api offline_access")
     }()
 
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var responseLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -94,9 +97,39 @@ class ViewController: UIViewController {
                         case let .failure(error):
                             print(error)
                         case let .success(tokenResponse):
-                            print(tokenResponse.accessToken)
                             
+                            guard let apiEndpoint = URL(string: "https://demo.identityserver.io/api/test") else { return }
+                            var apiRequest = URLRequest(url: apiEndpoint)
+                            apiRequest.addValue("\(tokenResponse.tokenType) \(tokenResponse.accessToken)", forHTTPHeaderField: "Authorization")
                             
+                            let task = URLSession.shared.dataTask(with: apiRequest) { (data, response, error) in
+                                if let error = error {
+                                    print(error)
+                                }
+                                
+                                if let jsonData = data, let jsonString = String(data: jsonData, encoding: .utf8) {
+                                    
+                                    print(jsonString)
+//                                    let rootAppended: NSString = "{\"result\":\(jsonString)}" as NSString
+//                                    print(rootAppended)
+//                                    if let rootAppendedData = rootAppended.data(using: String.Encoding.utf8.rawValue) {
+                                        guard let jsonObject = try? JSONSerialization.jsonObject(with: jsonData, options: []),
+                                            let formattedData = try? JSONSerialization.data(withJSONObject: jsonObject, options: [.prettyPrinted]),
+                                            let jsonString = String(data: formattedData, encoding: .utf8) else { return }
+                                        
+                                        DispatchQueue.main.async {
+                                            self.responseLabel.attributedText = NSAttributedString(string: jsonString)
+                                            
+                                            
+                                            self.responseLabel.sizeToFit()
+                                            
+                                            self.scrollView.contentSize = self.responseLabel.frame.size
+                                        }
+//                                    }
+                                }
+                            }
+                            
+                            task.resume()
                         }
                     }
                 }
@@ -155,9 +188,7 @@ class ViewController: UIViewController {
                 print(error)
                 completion(.failure(.tokenRequestError))
             }
-            if let jsonData = data, let dataString = String(data: jsonData, encoding: .utf8) {
-                print(dataString)
-                
+            if let jsonData = data {
                 do {
                     let decoder = JSONDecoder()
                     let tokenResponse = try decoder.decode(TokenResponse.self, from: jsonData)
