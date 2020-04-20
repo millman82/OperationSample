@@ -23,6 +23,7 @@
 		2799871E244689E10076789C /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2799871D244689E10076789C /* Token.swift */; };
 		27BA05BA2447B98D008D7621 /* DiscoveryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA05B92447B98D008D7621 /* DiscoveryService.swift */; };
 		27BA05BD244D57BA008D7621 /* SceneDelegate+ASWebAuthentcationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA05BC244D57BA008D7621 /* SceneDelegate+ASWebAuthentcationSession.swift */; };
+		27BA05BF244E45EA008D7621 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA05BE244E45EA008D7621 /* TokenResponse.swift */; };
 		27C7F041244764140024BCA6 /* LoginWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C7F040244764140024BCA6 /* LoginWebViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		2799871D244689E10076789C /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		27BA05B92447B98D008D7621 /* DiscoveryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryService.swift; sourceTree = "<group>"; };
 		27BA05BC244D57BA008D7621 /* SceneDelegate+ASWebAuthentcationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+ASWebAuthentcationSession.swift"; sourceTree = "<group>"; };
+		27BA05BE244E45EA008D7621 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
 		27C7F040244764140024BCA6 /* LoginWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,6 +177,7 @@
 			children = (
 				2799871D244689E10076789C /* Token.swift */,
 				277FB12524476D2E006D17CF /* DiscoveryInfo.swift */,
+				27BA05BE244E45EA008D7621 /* TokenResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				277FB12624476D2E006D17CF /* DiscoveryInfo.swift in Sources */,
 				27983C812445814900F55FC9 /* ViewController.swift in Sources */,
 				27C7F041244764140024BCA6 /* LoginWebViewController.swift in Sources */,
+				27BA05BF244E45EA008D7621 /* TokenResponse.swift in Sources */,
 				277FB12224476823006D17CF /* OAuthOptions.swift in Sources */,
 				27983C7D2445814900F55FC9 /* AppDelegate.swift in Sources */,
 				27BA05BD244D57BA008D7621 /* SceneDelegate+ASWebAuthentcationSession.swift in Sources */,

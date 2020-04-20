@@ -9,7 +9,9 @@
 import UIKit
 
 enum TokenError: Error {
+    case tokenRequestError
     case invalidRefreshToken
+    case invalidTokenResponse
 }
 
 class OAuthService: AuthService {

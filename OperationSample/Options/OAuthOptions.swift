@@ -9,9 +9,10 @@
 import Foundation
 
 struct OAuthOptions {
-    let authority: String
+    let authority: URL
     let clientId: String
     let clientSecret: String
-    let issuer: String
+    let issuer: URL
+    let redirectURI: URL
     let scope: String
 }

@@ -23,11 +23,11 @@ class OAuthDiscoveryService: DiscoveryService {
     }()
     
     func getDiscoveryInfo(oauthOptions options: OAuthOptions, completion: @escaping (DiscoveryInfo?) -> Void) {
-        if let cached = OAuthDiscoveryService.cache.object(forKey: options.authority as NSString) {
+        if let cached = OAuthDiscoveryService.cache.object(forKey: options.authority.absoluteString as NSString) {
             completion(cached)
         }
         
-        let discoveryEndpoint = options.authority + OAuthDiscoveryService.discoveryPath
+        let discoveryEndpoint = options.authority.absoluteString + OAuthDiscoveryService.discoveryPath
         
         let request = URLRequest(url: URL(string: discoveryEndpoint)!)
         
@@ -37,7 +37,7 @@ class OAuthDiscoveryService: DiscoveryService {
                 return
             }
             
-            OAuthDiscoveryService.cache.setObject(discoveryInfo, forKey: options.authority as NSString)
+            OAuthDiscoveryService.cache.setObject(discoveryInfo, forKey: options.authority.absoluteString as NSString)
             completion(discoveryInfo)
         }
     }

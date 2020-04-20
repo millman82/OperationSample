@@ -18,7 +18,7 @@ class LoginWebViewController: UIViewController {
         
         let currentLocale = Locale.current
         
-        let authorizationUrl = options.authority + "connect/authorize"
+        let authorizationUrl = options.authority.absoluteString + "connect/authorize"
         
         var request = URLRequest(url: URL(string: "https://demo.identityserver.io/connect/authorize")!)
         request.setValue(currentLocale.identifier, forHTTPHeaderField: "Accept-Language")
