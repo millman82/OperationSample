@@ -71,79 +71,76 @@ class OAuthService: AuthService {
                     print("Unable to refresh. Prompt for login. \(error)")
                     
                     OAuthService.tokens = [:]
-                    presentLogin(requestingViewController: requestingViewController, codeVerifier: codeVerifier, completion: loginCallback)
-                    //var loginController = LoginWebViewController(oauthOptions: oauthOptions, coder: NSCoder())
-                    //loginController.present()
+                    authorize(requestingViewController: requestingViewController, codeVerifier: codeVerifier, completion: loginCallback)
                 }
             }
         } else {
-            presentLogin(requestingViewController: requestingViewController, codeVerifier: codeVerifier, completion: loginCallback)
+            authorize(requestingViewController: requestingViewController, codeVerifier: codeVerifier, completion: loginCallback)
         }
     }
     
-    func presentLogin(requestingViewController: UIViewController, codeVerifier: String, completion: @escaping (Result<String,AuthorizationError>) -> Void) {
-            
-            if let strData = codeVerifier.data(using: .utf8) {
-                let sha256 = SHA256.hash(data: strData)
-                let codeChallenge = sha256.withUnsafeBytes { (pointer) -> String in
-                    
-                    let data = Data(bytes: pointer.baseAddress!, count: pointer.count)
-                    let encodedData = data.base64EncodedData()
-                    
-                    return String(data: encodedData, encoding: .ascii)!
-                }
+    func authorize(requestingViewController: UIViewController, codeVerifier: String, completion: @escaping (Result<String,AuthorizationError>) -> Void) {
+        if let strData = codeVerifier.data(using: .utf8) {
+            let sha256 = SHA256.hash(data: strData)
+            let codeChallenge = sha256.withUnsafeBytes { (pointer) -> String in
                 
-                guard var urlComponents = URLComponents(string: "https://demo.identityserver.io/connect/authorize") else { return }
+                let data = Data(bytes: pointer.baseAddress!, count: pointer.count)
+                let encodedData = data.base64EncodedData()
                 
-                let csrf = UUID().uuidString
-                
-                let encodedChallenge = codeChallenge.replacingOccurrences(of: "+", with: "-")
-                    .replacingOccurrences(of: "/", with: "_")
-                    .replacingOccurrences(of: "=", with: "")
-                
-                let query: [String:Any] = [
-                    "response_type": "code",
-                    "client_id": oauthOptions.clientId,
-                    "code_challenge": encodedChallenge,
-                    "code_challenge_method": "S256",
-                    "redirect_uri": oauthOptions.redirectURI.absoluteString,
-                    "scope": oauthOptions.scope,
-                    "state": csrf.urlEncoded
-                ]
-                
-                urlComponents.query = query.urlEncodedQuery
-                
-                guard let authURL = urlComponents.url else { return }
-                
-                print(authURL)
-                
-                let scheme = oauthOptions.redirectURI.scheme
-                
-                let session = ASWebAuthenticationSession(url: authURL, callbackURLScheme: scheme) { (callbackURL, error) in
-                    if let error = error {
-                        print(error)
-                    }
-                    
-                    guard let callbackURL = callbackURL else { return }
-                    print(callbackURL)
-                    let queryItems = URLComponents(string: callbackURL.absoluteString)?.queryItems
-                    
-                    guard let state = queryItems?.filter({ $0.name == "state" }).first?.value, state == csrf else {
-                        print("Invalid response: state corrupt")
-                        return
-                    }
-                    
-                    if let code = queryItems?.filter({ $0.name == "code" }).first?.value {
-                        completion(.success(code))
-                    } else {
-                        completion(.failure(.authorizationFailed))
-                    }
-                }
-                
-                session.presentationContextProvider = requestingViewController
-                session.start()
+                return String(data: encodedData, encoding: .ascii)!
             }
+            
+            guard var urlComponents = URLComponents(string: "https://demo.identityserver.io/connect/authorize") else { return }
+            
+            let csrf = UUID().uuidString
+            
+            let encodedChallenge = codeChallenge.replacingOccurrences(of: "+", with: "-")
+                .replacingOccurrences(of: "/", with: "_")
+                .replacingOccurrences(of: "=", with: "")
+            
+            let query: [String:Any] = [
+                "response_type": "code",
+                "client_id": oauthOptions.clientId,
+                "code_challenge": encodedChallenge,
+                "code_challenge_method": "S256",
+                "redirect_uri": oauthOptions.redirectURI.absoluteString,
+                "scope": oauthOptions.scope,
+                "state": csrf.urlEncoded
+            ]
+            
+            urlComponents.query = query.urlEncodedQuery
+            
+            guard let authURL = urlComponents.url else { return }
+            
+            print(authURL)
+            
+            let scheme = oauthOptions.redirectURI.scheme
+            
+            let session = ASWebAuthenticationSession(url: authURL, callbackURLScheme: scheme) { (callbackURL, error) in
+                if let error = error {
+                    print(error)
+                }
+                
+                guard let callbackURL = callbackURL else { return }
+                print(callbackURL)
+                let queryItems = URLComponents(string: callbackURL.absoluteString)?.queryItems
+                
+                guard let state = queryItems?.filter({ $0.name == "state" }).first?.value, state == csrf else {
+                    print("Invalid response: state corrupt")
+                    return
+                }
+                
+                if let code = queryItems?.filter({ $0.name == "code" }).first?.value {
+                    completion(.success(code))
+                } else {
+                    completion(.failure(.authorizationFailed))
+                }
+            }
+            
+            session.presentationContextProvider = requestingViewController
+            session.start()
         }
+    }
     
     private func retrieveTokens(code: String, codeVerifier: String, completion: @escaping (Result<TokenResponse, TokenError>) -> Void) {
         guard let url = URL(string: "https://demo.identityserver.io/connect/token") else {
