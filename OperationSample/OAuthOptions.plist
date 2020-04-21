@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AuthorizeEndpoint</key>
+	<string>https://demo.identityserver.io/connect/authorize</string>
+	<key>ClientId</key>
+	<string>interactive.confidential.short</string>
+	<key>ClientSecret</key>
+	<string>secret</string>
+	<key>Issuer</key>
+	<string>https://demo.identityserver.io</string>
+	<key>RedirectURI</key>
+	<string>com.timmiller.operationsample://oauth-callback</string>
+	<key>Scope</key>
+	<string>api offline_access</string>
+	<key>TokenEndpoint</key>
+	<string>https://demo.identityserver.io/connect/token</string>
+</dict>
+</plist>

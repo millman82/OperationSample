@@ -13,13 +13,7 @@ enum TokenType: NSString {
     case refreshToken = "RefreshToken"
 }
 
-class Token {
+struct Token {
     let value: String
-    let expires: Date
-    
-    init(_ token: String, expires: Date)
-    {
-        self.value = token
-        self.expires = expires
-    }
+    let expires: Date?
 }

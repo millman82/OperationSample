@@ -6,8 +6,8 @@
 //  Copyright © 2020 Timothy Miller. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol AuthService {
-    func getToken(completion: (String) -> Void)
+    func getToken(requestingViewController: UIViewController, completion: @escaping (String) -> Void)
 }

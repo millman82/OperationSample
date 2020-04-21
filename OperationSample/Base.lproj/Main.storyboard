@@ -19,9 +19,9 @@
                                 <rect key="frame" x="0.0" y="31" width="414" height="851"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Data" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yaj-uI-qJQ">
-                                        <rect key="frame" x="8" y="0.0" width="398" height="896"/>
+                                        <rect key="frame" x="8" y="8" width="398" height="844"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="896" placeholder="YES" id="uPT-C8-xHy"/>
+                                            <constraint firstAttribute="height" constant="844" placeholder="YES" id="uPT-C8-xHy"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -31,8 +31,8 @@
                                 <constraints>
                                     <constraint firstItem="Yaj-uI-qJQ" firstAttribute="trailing" secondItem="ia3-66-CWL" secondAttribute="trailingMargin" id="3V0-ce-7gk"/>
                                     <constraint firstItem="Yaj-uI-qJQ" firstAttribute="leading" secondItem="ia3-66-CWL" secondAttribute="leadingMargin" id="FfQ-uZ-Oog"/>
-                                    <constraint firstAttribute="bottom" secondItem="Yaj-uI-qJQ" secondAttribute="bottom" constant="-45" id="Tan-wu-XEM"/>
-                                    <constraint firstItem="Yaj-uI-qJQ" firstAttribute="top" secondItem="oNh-p9-Ts0" secondAttribute="top" id="a3g-29-JWh"/>
+                                    <constraint firstAttribute="bottom" secondItem="Yaj-uI-qJQ" secondAttribute="bottom" constant="8" id="Tan-wu-XEM"/>
+                                    <constraint firstItem="Yaj-uI-qJQ" firstAttribute="top" secondItem="oNh-p9-Ts0" secondAttribute="top" constant="8" id="a3g-29-JWh"/>
                                     <constraint firstItem="Yaj-uI-qJQ" firstAttribute="centerX" secondItem="ia3-66-CWL" secondAttribute="centerX" id="o9Y-wa-Qm6"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="oNh-p9-Ts0"/>

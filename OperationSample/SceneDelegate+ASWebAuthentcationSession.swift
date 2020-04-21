@@ -9,8 +9,8 @@
 import UIKit
 import AuthenticationServices
 
-extension SceneDelegate: ASWebAuthenticationPresentationContextProviding {
-    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
-        return window!
-    }
-}
+//extension SceneDelegate: ASWebAuthenticationPresentationContextProviding {
+//    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+//        return window!
+//    }
+//}
