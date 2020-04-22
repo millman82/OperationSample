@@ -25,8 +25,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        //presentLogin()
-        
         scrollView.addSubview(refreshControl)
         
         refreshControl.addTarget(self, action: #selector(ViewController.handleRefresh), for: UIControl.Event.valueChanged)
@@ -54,8 +52,6 @@ class ViewController: UIViewController {
                     
                     DispatchQueue.main.async {
                         self.responseLabel.attributedText = NSAttributedString(string: jsonString)
-                        
-                        
                         self.responseLabel.sizeToFit()
                         
                         self.scrollView.contentSize = self.responseLabel.frame.size
