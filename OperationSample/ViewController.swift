@@ -13,7 +13,7 @@ import CryptoKit
 class ViewController: UIViewController {
     
     private let oauthOptions: OAuthOptions = {
-        return AuthContext.shared.options
+        return Coordinators.authentication.authContext.options
     }()
 
     @IBOutlet weak var scrollView: UIScrollView!

@@ -26,6 +26,7 @@
 		27BA05C7244EB2F3008D7621 /* AuthContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA05C6244EB2F3008D7621 /* AuthContext.swift */; };
 		27BA05C9244EB7DE008D7621 /* OAuthOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27BA05C8244EB7DE008D7621 /* OAuthOptions.plist */; };
 		27BA05CB244EC25E008D7621 /* UIViewController+ASWebAuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA05CA244EC25E008D7621 /* UIViewController+ASWebAuthenticationSession.swift */; };
+		EAE49890245007BA002559F9 /* Coordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4988F245007BA002559F9 /* Coordinators.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		27BA05C6244EB2F3008D7621 /* AuthContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthContext.swift; sourceTree = "<group>"; };
 		27BA05C8244EB7DE008D7621 /* OAuthOptions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = OAuthOptions.plist; sourceTree = "<group>"; };
 		27BA05CA244EC25E008D7621 /* UIViewController+ASWebAuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ASWebAuthenticationSession.swift"; sourceTree = "<group>"; };
+		EAE4988F245007BA002559F9 /* Coordinators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinators.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				27BA05C6244EB2F3008D7621 /* AuthContext.swift */,
+				EAE4988F245007BA002559F9 /* Coordinators.swift */,
 			);
 			path = Contexts;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 			files = (
 				27983C812445814900F55FC9 /* ViewController.swift in Sources */,
 				27BA05C7244EB2F3008D7621 /* AuthContext.swift in Sources */,
+				EAE49890245007BA002559F9 /* Coordinators.swift in Sources */,
 				27BA05BF244E45EA008D7621 /* TokenResponse.swift in Sources */,
 				27BA05C4244EB227008D7621 /* Dictionary+URL.swift in Sources */,
 				277FB12224476823006D17CF /* OAuthOptions.swift in Sources */,
@@ -519,7 +523,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YANEU7VTX5;
+				DEVELOPMENT_TEAM = 93KKH99Z5P;
 				INFOPLIST_FILE = OperationSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -537,7 +541,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YANEU7VTX5;
+				DEVELOPMENT_TEAM = 93KKH99Z5P;
 				INFOPLIST_FILE = OperationSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

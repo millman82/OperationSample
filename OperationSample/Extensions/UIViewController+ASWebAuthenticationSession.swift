@@ -10,7 +10,5 @@ import UIKit
 import AuthenticationServices
 
 extension UIViewController: ASWebAuthenticationPresentationContextProviding {
-    public func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
-        return self.view.window!
-    }
+    public func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor { view.window! }
 }

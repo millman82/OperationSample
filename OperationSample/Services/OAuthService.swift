@@ -24,7 +24,7 @@ class OAuthService: AuthService {
     private static var tokens: [TokenType:Token] = [:]
     
     private let oauthOptions: OAuthOptions = {
-        return AuthContext.shared.options
+        return Coordinators.authentication.authContext.options
     }()
     
     func getToken(requestingViewController: UIViewController, completion: @escaping (String) -> Void) {
@@ -37,10 +37,10 @@ class OAuthService: AuthService {
         let tokenRetreivalCallback = { (result: Result<TokenResponse, TokenError>) -> Void in
             switch result {
             case let .success(tokenResponse):
-                AuthContext.shared.tokens[.accessToken] = Token(value: tokenResponse.accessToken, expires: tokenResponse.expiry)
+                Coordinators.authentication.authContext.tokens[.accessToken] = Token(value: tokenResponse.accessToken, expires: tokenResponse.expiry)
                 
                 if let refreshToken = tokenResponse.refreshToken {
-                    AuthContext.shared.tokens[.refreshToken] = Token(value: refreshToken, expires: nil)
+                    Coordinators.authentication.authContext.tokens[.refreshToken] = Token(value: refreshToken, expires: nil)
                 }
                 
                 completion(tokenResponse.accessToken)
@@ -59,7 +59,7 @@ class OAuthService: AuthService {
             
         }
         
-        if let refreshToken = OAuthService.tokens[.refreshToken] {
+        if let _ = OAuthService.tokens[.refreshToken] {
             refreshAccessToken { (result) in
                 switch result {
                 case let .success(tokenResponse):
