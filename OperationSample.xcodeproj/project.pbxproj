@@ -27,6 +27,7 @@
 		27BA05C9244EB7DE008D7621 /* OAuthOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27BA05C8244EB7DE008D7621 /* OAuthOptions.plist */; };
 		27BA05CB244EC25E008D7621 /* UIViewController+ASWebAuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA05CA244EC25E008D7621 /* UIViewController+ASWebAuthenticationSession.swift */; };
 		EAE49890245007BA002559F9 /* Coordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4988F245007BA002559F9 /* Coordinators.swift */; };
+		EAE4989224500BE0002559F9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE4989124500BE0002559F9 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		27BA05C8244EB7DE008D7621 /* OAuthOptions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = OAuthOptions.plist; sourceTree = "<group>"; };
 		27BA05CA244EC25E008D7621 /* UIViewController+ASWebAuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ASWebAuthenticationSession.swift"; sourceTree = "<group>"; };
 		EAE4988F245007BA002559F9 /* Coordinators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinators.swift; sourceTree = "<group>"; };
+		EAE4989124500BE0002559F9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 				27983C7E2445814900F55FC9 /* SceneDelegate.swift */,
 				27BA05BC244D57BA008D7621 /* SceneDelegate+ASWebAuthentcationSession.swift */,
 				27983C802445814900F55FC9 /* ViewController.swift */,
+				EAE4989124500BE0002559F9 /* MainViewController.swift */,
 				27983C822445814900F55FC9 /* Main.storyboard */,
 				27983C852445814B00F55FC9 /* Assets.xcassets */,
 				27983C872445814B00F55FC9 /* LaunchScreen.storyboard */,
@@ -345,6 +348,7 @@
 				27BA05CB244EC25E008D7621 /* UIViewController+ASWebAuthenticationSession.swift in Sources */,
 				27983C7D2445814900F55FC9 /* AppDelegate.swift in Sources */,
 				27BA05BD244D57BA008D7621 /* SceneDelegate+ASWebAuthentcationSession.swift in Sources */,
+				EAE4989224500BE0002559F9 /* MainViewController.swift in Sources */,
 				2799871B2446862A0076789C /* OAuthService.swift in Sources */,
 				2799871E244689E10076789C /* Token.swift in Sources */,
 				27983C7F2445814900F55FC9 /* SceneDelegate.swift in Sources */,

@@ -20,7 +20,7 @@ enum TokenError: Error {
     case invalidTokenResponse
 }
 
-class OAuthService: AuthService {
+struct OAuthService {
     private static var tokens: [TokenType:Token] = [:]
     
     private let oauthOptions: OAuthOptions = {
@@ -56,7 +56,6 @@ class OAuthService: AuthService {
             case let .failure(error):
                 print(error)
             }
-            
         }
         
         if let _ = OAuthService.tokens[.refreshToken] {
