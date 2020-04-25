@@ -18,9 +18,8 @@ enum ClaimsApiError: Error {
 struct ClaimsService {
     private let authService: AuthService
     
-    func retrieveClaims(requestingViewController: UIViewController, completion: @escaping (Result<[Claim],ClaimsApiError>) -> Void) {
-        let authService = OAuthService()
-        authService.getToken(requestingViewController: requestingViewController) { (token) in
+    func retrieveClaims(completion: @escaping (Result<[Claim],ClaimsApiError>) -> Void) {
+        authService.getToken() { (token) in
             guard let apiEndpoint = URL(string: "https://demo.identityserver.io/api/test") else {
                 completion(.failure(.invalidURL))
                 return

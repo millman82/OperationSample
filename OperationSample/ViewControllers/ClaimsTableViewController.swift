@@ -32,7 +32,7 @@ class ClaimsTableViewController: UITableViewController {
     func updateClaims() {
         guard let claimsService = claimsService else { return }
         
-        claimsService.retrieveClaims(requestingViewController: self) { (result) in
+        claimsService.retrieveClaims() { (result) in
             switch result {
             case let .success(claims):
                 self.claimsDataSource.claims = claims

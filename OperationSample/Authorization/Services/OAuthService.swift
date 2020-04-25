@@ -25,7 +25,9 @@ struct OAuthService: AuthService {
         return AuthContext.shared.options
     }()
     
-    func getToken(requestingViewController: UIViewController, completion: @escaping (String) -> Void) {
+    private let oauthViewController: OAuthViewController
+    
+    func getToken(completion: @escaping (String) -> Void) {
         if let accessToken = AuthContext.shared.tokens[.accessToken], let expires = accessToken.expires, Date() < expires {
             completion(accessToken.value)
             return
@@ -72,15 +74,21 @@ struct OAuthService: AuthService {
                     print("Unable to refresh. Prompt for login. \(error)")
                     
                     AuthContext.shared.tokens = [:]
-                    self.authorize(requestingViewController: requestingViewController, codeVerifier: codeVerifier, completion: loginCallback)
+                    self.authorize(codeVerifier: codeVerifier, completion: loginCallback)
                 }
             }
         } else {
-            authorize(requestingViewController: requestingViewController, codeVerifier: codeVerifier, completion: loginCallback)
+            authorize(codeVerifier: codeVerifier, completion: loginCallback)
         }
     }
     
-    private func authorize(requestingViewController: UIViewController, codeVerifier: String, completion: @escaping (Result<String,AuthorizationError>) -> Void) {
+    init(globalPresentationAnchor: ASPresentationAnchor?)
+    {
+        oauthViewController = OAuthViewController()
+        oauthViewController.globalPresentationAnchor = globalPresentationAnchor
+    }
+    
+    private func authorize(codeVerifier: String, completion: @escaping (Result<String,AuthorizationError>) -> Void) {
         if let strData = codeVerifier.data(using: .utf8) {
             let sha256 = SHA256.hash(data: strData)
             let codeChallenge = sha256.withUnsafeBytes { (pointer) -> String in
@@ -113,8 +121,6 @@ struct OAuthService: AuthService {
             
             guard let authURL = urlComponents.url else { return }
             
-            print(authURL)
-            
             let scheme = oauthOptions.redirectURI.scheme
             
             let session = ASWebAuthenticationSession(url: authURL, callbackURLScheme: scheme) { (callbackURL, error) in
@@ -138,7 +144,9 @@ struct OAuthService: AuthService {
                 }
             }
             
-            session.presentationContextProvider = requestingViewController
+            let presentationContextProvider = OAuthViewController()
+            
+            session.presentationContextProvider = presentationContextProvider
             session.start()
         }
     }

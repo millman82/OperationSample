@@ -9,5 +9,5 @@
 import UIKit
 
 protocol AuthService {
-    func getToken(requestingViewController: UIViewController, completion: @escaping (String) -> Void)
+    func getToken(completion: @escaping (String) -> Void)
 }
