@@ -19,7 +19,6 @@
 		27998719244685C50076789C /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27998718244685C50076789C /* AuthService.swift */; };
 		2799871B2446862A0076789C /* OAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2799871A2446862A0076789C /* OAuthService.swift */; };
 		2799871E244689E10076789C /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2799871D244689E10076789C /* Token.swift */; };
-		27BA05BD244D57BA008D7621 /* SceneDelegate+ASWebAuthentcationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA05BC244D57BA008D7621 /* SceneDelegate+ASWebAuthentcationSession.swift */; };
 		27BA05BF244E45EA008D7621 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA05BE244E45EA008D7621 /* TokenResponse.swift */; };
 		27BA05C2244EB1ED008D7621 /* String+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA05C1244EB1ED008D7621 /* String+URL.swift */; };
 		27BA05C4244EB227008D7621 /* Dictionary+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA05C3244EB227008D7621 /* Dictionary+URL.swift */; };
@@ -67,7 +66,6 @@
 		27998718244685C50076789C /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		2799871A2446862A0076789C /* OAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthService.swift; sourceTree = "<group>"; };
 		2799871D244689E10076789C /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
-		27BA05BC244D57BA008D7621 /* SceneDelegate+ASWebAuthentcationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+ASWebAuthentcationSession.swift"; sourceTree = "<group>"; };
 		27BA05BE244E45EA008D7621 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
 		27BA05C1244EB1ED008D7621 /* String+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+URL.swift"; sourceTree = "<group>"; };
 		27BA05C3244EB227008D7621 /* Dictionary+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+URL.swift"; sourceTree = "<group>"; };
@@ -104,13 +102,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		270B725B24537050000E3036 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		277FB12024476810006D17CF /* Options */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,9 +141,7 @@
 				277FB12024476810006D17CF /* Options */,
 				27998717244685A00076789C /* Services */,
 				27D73DA82453763E002BD70B /* ViewControllers */,
-				270B725B24537050000E3036 /* ViewModels */,
 				27983C7E2445814900F55FC9 /* SceneDelegate.swift */,
-				27BA05BC244D57BA008D7621 /* SceneDelegate+ASWebAuthentcationSession.swift */,
 				27983C822445814900F55FC9 /* Main.storyboard */,
 				27983C852445814B00F55FC9 /* Assets.xcassets */,
 				27983C872445814B00F55FC9 /* LaunchScreen.storyboard */,
@@ -373,7 +362,6 @@
 				277FB12224476823006D17CF /* OAuthOptions.swift in Sources */,
 				27BA05CB244EC25E008D7621 /* UIViewController+ASWebAuthenticationSession.swift in Sources */,
 				27983C7D2445814900F55FC9 /* AppDelegate.swift in Sources */,
-				27BA05BD244D57BA008D7621 /* SceneDelegate+ASWebAuthentcationSession.swift in Sources */,
 				2799871B2446862A0076789C /* OAuthService.swift in Sources */,
 				27D73DAE245376F6002BD70B /* ClaimsTableViewDataSource.swift in Sources */,
 				27D73DAA24537653002BD70B /* ClaimsTableViewController.swift in Sources */,

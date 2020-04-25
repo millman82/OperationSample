@@ -25,10 +25,6 @@ class ClaimsTableViewController: UITableViewController {
         refreshControl = UIRefreshControl()
         
         refreshControl?.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
         updateClaims()
     }
