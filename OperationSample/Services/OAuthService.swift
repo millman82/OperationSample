@@ -20,16 +20,15 @@ enum TokenError: Error {
     case invalidTokenResponse
 }
 
-class OAuthService: AuthService {
-    private static var tokens: [TokenType:Token] = [:]
-    
+struct OAuthService: AuthService {
     private let oauthOptions: OAuthOptions = {
         return AuthContext.shared.options
     }()
     
     func getToken(requestingViewController: UIViewController, completion: @escaping (String) -> Void) {
-        if let accessToken = OAuthService.tokens[.accessToken], let expires = accessToken.expires, expires < Date() {
+        if let accessToken = AuthContext.shared.tokens[.accessToken], let expires = accessToken.expires, Date() < expires {
             completion(accessToken.value)
+            return
         }
             
         let codeVerifier = UUID().uuidString + UUID().uuidString
@@ -59,19 +58,21 @@ class OAuthService: AuthService {
             
         }
         
-        if let refreshToken = OAuthService.tokens[.refreshToken] {
-            refreshAccessToken { (result) in
+        if let refreshToken = AuthContext.shared.tokens[.refreshToken] {
+            refreshAccessToken(refreshToken.value) { (result) in
                 switch result {
                 case let .success(tokenResponse):
-                    OAuthService.tokens[.accessToken] = Token(value: tokenResponse.accessToken, expires: tokenResponse.expiry)
+                    AuthContext.shared.tokens[.accessToken] = Token(value: tokenResponse.accessToken, expires: tokenResponse.expiry)
                     if let refreshToken = tokenResponse.refreshToken {
-                        OAuthService.tokens[.refreshToken] = Token(value: refreshToken, expires: nil)
+                        AuthContext.shared.tokens[.refreshToken] = Token(value: refreshToken, expires: nil)
                     }
+                    
+                    completion(tokenResponse.accessToken)
                 case let .failure(error):
                     print("Unable to refresh. Prompt for login. \(error)")
                     
-                    OAuthService.tokens = [:]
-                    authorize(requestingViewController: requestingViewController, codeVerifier: codeVerifier, completion: loginCallback)
+                    AuthContext.shared.tokens = [:]
+                    self.authorize(requestingViewController: requestingViewController, codeVerifier: codeVerifier, completion: loginCallback)
                 }
             }
         } else {
@@ -79,7 +80,7 @@ class OAuthService: AuthService {
         }
     }
     
-    func authorize(requestingViewController: UIViewController, codeVerifier: String, completion: @escaping (Result<String,AuthorizationError>) -> Void) {
+    private func authorize(requestingViewController: UIViewController, codeVerifier: String, completion: @escaping (Result<String,AuthorizationError>) -> Void) {
         if let strData = codeVerifier.data(using: .utf8) {
             let sha256 = SHA256.hash(data: strData)
             let codeChallenge = sha256.withUnsafeBytes { (pointer) -> String in
@@ -90,7 +91,7 @@ class OAuthService: AuthService {
                 return String(data: encodedData, encoding: .ascii)!
             }
             
-            guard var urlComponents = URLComponents(string: "https://demo.identityserver.io/connect/authorize") else { return }
+            guard var urlComponents = URLComponents(url: oauthOptions.authorizeEndpoint, resolvingAgainstBaseURL: false) else { return }
             
             let csrf = UUID().uuidString
             
@@ -143,11 +144,6 @@ class OAuthService: AuthService {
     }
     
     private func retrieveTokens(code: String, codeVerifier: String, completion: @escaping (Result<TokenResponse, TokenError>) -> Void) {
-        guard let url = URL(string: "https://demo.identityserver.io/connect/token") else {
-            completion(.failure(.tokenRequestError))
-            return
-        }
-        
         var parameters: [String:Any] = [:]
         parameters["client_id"] = oauthOptions.clientId
         parameters["code"] = code
@@ -156,7 +152,21 @@ class OAuthService: AuthService {
         parameters["client_secret"] = oauthOptions.clientSecret
         parameters["redirect_uri"] = oauthOptions.redirectURI.absoluteString
         
-        var request = URLRequest(url: url)
+        tokenRequest(parameters: parameters, completion: completion)
+    }
+    
+    private func refreshAccessToken(_ refreshToken: String, completion: @escaping (Result<TokenResponse, TokenError>) -> Void) {
+        var parameters: [String:Any] = [:]
+        parameters["client_id"] = oauthOptions.clientId
+        parameters["grant_type"] = "refresh_token"
+        parameters["refresh_token"] = refreshToken
+        parameters["client_secret"] = oauthOptions.clientSecret
+        
+        tokenRequest(parameters: parameters, completion: completion)
+    }
+    
+    private func tokenRequest(parameters: [String:Any], completion: @escaping (Result<TokenResponse, TokenError>) -> Void) {
+        var request = URLRequest(url: oauthOptions.tokenEndpoint)
         request.httpMethod = "POST"
         request.setValue("application/x-www-form-urlencoded; charset\(String.Encoding.utf8.charset)", forHTTPHeaderField: "Content-Type")
         request.httpBody = parameters.urlEncodedQuery.data(using: .utf8)
@@ -184,10 +194,4 @@ class OAuthService: AuthService {
         
         task.resume()
     }
-    
-    private func refreshAccessToken(completion: (Result<TokenResponse, TokenError>) -> Void) {
-        
-    }
-    
-    
 }

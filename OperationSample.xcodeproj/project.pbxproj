@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		270B725D24537085000E3036 /* ClaimsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270B725C24537085000E3036 /* ClaimsService.swift */; };
 		277FB12224476823006D17CF /* OAuthOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277FB12124476823006D17CF /* OAuthOptions.swift */; };
 		27983C7D2445814900F55FC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27983C7C2445814900F55FC9 /* AppDelegate.swift */; };
 		27983C7F2445814900F55FC9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27983C7E2445814900F55FC9 /* SceneDelegate.swift */; };
-		27983C812445814900F55FC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27983C802445814900F55FC9 /* ViewController.swift */; };
 		27983C842445814900F55FC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27983C822445814900F55FC9 /* Main.storyboard */; };
 		27983C862445814B00F55FC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27983C852445814B00F55FC9 /* Assets.xcassets */; };
 		27983C892445814B00F55FC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27983C872445814B00F55FC9 /* LaunchScreen.storyboard */; };
@@ -26,6 +26,9 @@
 		27BA05C7244EB2F3008D7621 /* AuthContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA05C6244EB2F3008D7621 /* AuthContext.swift */; };
 		27BA05C9244EB7DE008D7621 /* OAuthOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27BA05C8244EB7DE008D7621 /* OAuthOptions.plist */; };
 		27BA05CB244EC25E008D7621 /* UIViewController+ASWebAuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA05CA244EC25E008D7621 /* UIViewController+ASWebAuthenticationSession.swift */; };
+		27D73DA7245374FA002BD70B /* Claim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D73DA6245374FA002BD70B /* Claim.swift */; };
+		27D73DAA24537653002BD70B /* ClaimsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D73DA924537653002BD70B /* ClaimsTableViewController.swift */; };
+		27D73DAE245376F6002BD70B /* ClaimsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D73DAD245376F6002BD70B /* ClaimsTableViewDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,11 +49,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		270B725C24537085000E3036 /* ClaimsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimsService.swift; sourceTree = "<group>"; };
 		277FB12124476823006D17CF /* OAuthOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthOptions.swift; sourceTree = "<group>"; };
 		27983C792445814900F55FC9 /* OperationSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OperationSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27983C7C2445814900F55FC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27983C7E2445814900F55FC9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		27983C802445814900F55FC9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		27983C832445814900F55FC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		27983C852445814B00F55FC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27983C882445814B00F55FC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -71,6 +74,9 @@
 		27BA05C6244EB2F3008D7621 /* AuthContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthContext.swift; sourceTree = "<group>"; };
 		27BA05C8244EB7DE008D7621 /* OAuthOptions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = OAuthOptions.plist; sourceTree = "<group>"; };
 		27BA05CA244EC25E008D7621 /* UIViewController+ASWebAuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ASWebAuthenticationSession.swift"; sourceTree = "<group>"; };
+		27D73DA6245374FA002BD70B /* Claim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Claim.swift; sourceTree = "<group>"; };
+		27D73DA924537653002BD70B /* ClaimsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimsTableViewController.swift; sourceTree = "<group>"; };
+		27D73DAD245376F6002BD70B /* ClaimsTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimsTableViewDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		270B725B24537050000E3036 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		277FB12024476810006D17CF /* Options */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,13 +144,15 @@
 			children = (
 				27983C7C2445814900F55FC9 /* AppDelegate.swift */,
 				27BA05C5244EB2E3008D7621 /* Contexts */,
+				27D73DAC245376DF002BD70B /* DataSources */,
 				27BA05C0244EB1D1008D7621 /* Extensions */,
 				2799871C244689D30076789C /* Models */,
 				277FB12024476810006D17CF /* Options */,
 				27998717244685A00076789C /* Services */,
+				27D73DA82453763E002BD70B /* ViewControllers */,
+				270B725B24537050000E3036 /* ViewModels */,
 				27983C7E2445814900F55FC9 /* SceneDelegate.swift */,
 				27BA05BC244D57BA008D7621 /* SceneDelegate+ASWebAuthentcationSession.swift */,
-				27983C802445814900F55FC9 /* ViewController.swift */,
 				27983C822445814900F55FC9 /* Main.storyboard */,
 				27983C852445814B00F55FC9 /* Assets.xcassets */,
 				27983C872445814B00F55FC9 /* LaunchScreen.storyboard */,
@@ -168,8 +183,9 @@
 		27998717244685A00076789C /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				2799871A2446862A0076789C /* OAuthService.swift */,
 				27998718244685C50076789C /* AuthService.swift */,
+				270B725C24537085000E3036 /* ClaimsService.swift */,
+				2799871A2446862A0076789C /* OAuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -179,6 +195,7 @@
 			children = (
 				2799871D244689E10076789C /* Token.swift */,
 				27BA05BE244E45EA008D7621 /* TokenResponse.swift */,
+				27D73DA6245374FA002BD70B /* Claim.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -199,6 +216,22 @@
 				27BA05C6244EB2F3008D7621 /* AuthContext.swift */,
 			);
 			path = Contexts;
+			sourceTree = "<group>";
+		};
+		27D73DA82453763E002BD70B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				27D73DA924537653002BD70B /* ClaimsTableViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		27D73DAC245376DF002BD70B /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				27D73DAD245376F6002BD70B /* ClaimsTableViewDataSource.swift */,
+			);
+			path = DataSources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,18 +366,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27983C812445814900F55FC9 /* ViewController.swift in Sources */,
 				27BA05C7244EB2F3008D7621 /* AuthContext.swift in Sources */,
 				27BA05BF244E45EA008D7621 /* TokenResponse.swift in Sources */,
+				270B725D24537085000E3036 /* ClaimsService.swift in Sources */,
 				27BA05C4244EB227008D7621 /* Dictionary+URL.swift in Sources */,
 				277FB12224476823006D17CF /* OAuthOptions.swift in Sources */,
 				27BA05CB244EC25E008D7621 /* UIViewController+ASWebAuthenticationSession.swift in Sources */,
 				27983C7D2445814900F55FC9 /* AppDelegate.swift in Sources */,
 				27BA05BD244D57BA008D7621 /* SceneDelegate+ASWebAuthentcationSession.swift in Sources */,
 				2799871B2446862A0076789C /* OAuthService.swift in Sources */,
+				27D73DAE245376F6002BD70B /* ClaimsTableViewDataSource.swift in Sources */,
+				27D73DAA24537653002BD70B /* ClaimsTableViewController.swift in Sources */,
 				2799871E244689E10076789C /* Token.swift in Sources */,
 				27983C7F2445814900F55FC9 /* SceneDelegate.swift in Sources */,
 				27BA05C2244EB1ED008D7621 /* String+URL.swift in Sources */,
+				27D73DA7245374FA002BD70B /* Claim.swift in Sources */,
 				27998719244685C50076789C /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
