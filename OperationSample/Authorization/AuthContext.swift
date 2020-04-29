@@ -9,8 +9,7 @@
 import Foundation
 
 class AuthContext {
-    static let shared: AuthContext = {
-        
+    static let shared: AuthContext = {        
         var plistURL = Bundle.main.url(forResource: "OAuthOptions", withExtension: "plist")!
         let data = try! Data(contentsOf: plistURL)
         
@@ -19,6 +18,7 @@ class AuthContext {
         return AuthContext(oauthOptions: options)
     }()
     
+    var authorizationCode: String?
     let options: OAuthOptions
     var tokens: [TokenType:Token] = [:]
     
