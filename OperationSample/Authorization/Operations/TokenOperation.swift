@@ -25,9 +25,47 @@ class TokenOperation: Operation {
 //        return true
 //    }
     
-    override func execute() {
+    private var _isExecuting: Bool = false {
+        willSet {
+            willChangeValue(forKey: "isExecuting")
+        }
+        didSet {
+            didChangeValue(forKey: "isExecuting")
+        }
+    }
+    
+    override var isExecuting: Bool {
+        return _isExecuting
+    }
+    
+    private var _isFinished: Bool = false {
+        willSet {
+            willChangeValue(forKey: "isFinished")
+        }
+        didSet {
+            didChangeValue(forKey: "isFinished")
+        }
+    }
+    
+    override var isFinished: Bool {
+        return _isFinished
+    }
+    
+    override func main() {
         if !isCancelled {
             issueTokenRequest(completion: completion)
+        } else {
+            _isExecuting = false
+            _isFinished = true
+        }
+    }
+    
+    override func start() {
+        if !isCancelled {
+            _isExecuting = true
+            main()
+        } else {
+            _isFinished = true
         }
     }
     
@@ -52,6 +90,10 @@ class TokenOperation: Operation {
         
         if !isCancelled {
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                defer {
+                    self._isExecuting = false
+                    self._isFinished = true
+                }
                 if let error = error {
                     print(error)
                     completion(.failure(.tokenRequestError))
@@ -70,11 +112,12 @@ class TokenOperation: Operation {
                 }
                 
                 AuthContext.shared.authorizationCode = nil
-                
-                self.finish()
             }
             
             task.resume()
+        } else {
+            _isExecuting = false
+            _isFinished = true
         }
     }
 }

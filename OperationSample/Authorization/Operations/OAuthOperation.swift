@@ -21,7 +21,8 @@ class OAuthOperation: Operation {
     lazy var operationQueue: OperationQueue = {
         var queue = OperationQueue()
         queue.name = "OAuth Queue"
-        queue.maxConcurrentOperationCount = 1
+        //queue.maxConcurrentOperationCount = 1
+        queue.isSuspended = true
         return queue
     }()
     
@@ -32,13 +33,48 @@ class OAuthOperation: Operation {
     
     private let completion: (String?) -> Void
     
-//    override var isAsynchronous: Bool {
-//        return true
-//    }
+    override var isAsynchronous: Bool {
+        return true
+    }
     
-    override func execute() {
+    private var _isExecuting: Bool = false {
+        willSet {
+            willChangeValue(forKey: "isExecuting")
+        }
+        didSet {
+            didChangeValue(forKey: "isExecuting")
+        }
+    }
+    
+    override var isExecuting: Bool {
+        return _isExecuting
+    }
+    
+    private var _isFinished: Bool = false {
+        willSet {
+            willChangeValue(forKey: "isFinished")
+        }
+        didSet {
+            didChangeValue(forKey: "isFinished")
+        }
+    }
+    
+    override var isFinished: Bool {
+        return _isFinished
+    }
+    
+    override func main() {
         if !isCancelled {
             getToken()
+        }
+    }
+    
+    override func start() {
+        if !isCancelled {
+            _isExecuting = true
+            main()
+        } else {
+            _isFinished = true
         }
     }
     
@@ -56,39 +92,53 @@ class OAuthOperation: Operation {
             }
             
             operationQueue.addOperation(tokenLookupOperation)
+            operationQueue.isSuspended = false
+        } else {
+            _isExecuting = false
+            _isFinished = true
         }
-        
-        if let refreshToken = AuthContext.shared.tokens[.refreshToken] {
-            if !operationsInProgress.keys.contains(.refresh) {
-                let refreshTokenOperation = refreshAccessToken(refreshToken.value)
-                let tokenLookupOperation = BlockOperation { [unowned self] in
-                    self.lookupCachedToken()
+
+        if !isCancelled {
+            if let refreshToken = AuthContext.shared.tokens[.refreshToken] {
+                if !operationsInProgress.keys.contains(.refresh) {
+                    let refreshTokenOperation = refreshAccessToken(refreshToken.value)
+                    let tokenLookupOperation = BlockOperation { [unowned self] in
+                        self.lookupCachedToken()
+                    }
+                    operationsInProgress[.refresh] = refreshTokenOperation
+                    tokenLookupOperation.addDependency(refreshTokenOperation)
+                    
+                    operationQueue.addOperation(refreshTokenOperation)
+                    operationQueue.addOperation(tokenLookupOperation)
+                    
+                    operationQueue.isSuspended = false
                 }
-                operationsInProgress[.refresh] = refreshTokenOperation
-                tokenLookupOperation.addDependency(refreshTokenOperation)
-                
-                operationQueue.addOperation(refreshTokenOperation)
-                operationQueue.addOperation(tokenLookupOperation)
+            } else {
+                if !operationsInProgress.keys.contains(.token) {
+                    codeVerifier = UUID().uuidString + UUID().uuidString
+                    let authorizeOperation = authorize()
+                    authorizeOperation.completionBlock = {
+                        self.operationsInProgress.removeValue(forKey: .authorize)
+                    }
+                    let tokenOperation = retrieveTokens()
+                    let tokenLookupOperation = BlockOperation { [unowned self] in
+                        self.lookupCachedToken()
+                    }
+                    operationsInProgress[.authorize] = authorizeOperation
+                    operationsInProgress[.token] = tokenOperation
+                    tokenOperation.addDependency(authorizeOperation)
+                    tokenLookupOperation.addDependency(tokenOperation)
+                    
+                    operationQueue.addOperation(authorizeOperation)
+                    operationQueue.addOperation(tokenOperation)
+                    operationQueue.addOperation(tokenLookupOperation)
+                    
+                    operationQueue.isSuspended = false
+                }
             }
         } else {
-            if !operationsInProgress.keys.contains(.token) {
-                codeVerifier = UUID().uuidString + UUID().uuidString
-                let authorizeOperation = authorize()
-                let tokenOperation = retrieveTokens()
-                let tokenLookupOperation = BlockOperation { [unowned self] in
-                    self.lookupCachedToken()
-                }
-                operationsInProgress[.authorize] = authorizeOperation
-                operationsInProgress[.token] = tokenOperation
-                tokenOperation.addDependency(authorizeOperation)
-                tokenLookupOperation.addDependency(tokenOperation)
-                
-                operationQueue.addOperation(tokenLookupOperation)
-                operationQueue.addOperation(tokenOperation)
-                operationQueue.addOperation(authorizeOperation)
-//                operationQueue.addOperation(tokenOperation)
-//                operationQueue.addOperation(tokenLookupOperation)
-            }
+            _isExecuting = false
+            _isFinished = true
         }
     }
     
@@ -117,8 +167,11 @@ class OAuthOperation: Operation {
         if let storedAccessToken = AuthContext.shared.tokens[.accessToken], let expires = storedAccessToken.expires, Date() < expires {
             accessToken = storedAccessToken.value
             self.completion(accessToken)
-            self.finish()
+            _isExecuting = false
+            _isFinished = true
         }
+        
+        operationQueue.isSuspended = true
     }
     
     private func retrieveTokens() -> TokenOperation {
