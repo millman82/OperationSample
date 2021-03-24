@@ -32,7 +32,9 @@ class ClaimsTableViewController: UITableViewController {
     func updateClaims() {
         guard let claimsService = claimsService else { return }
         
+        print("Call 1")
         claimsService.retrieveClaims() { (result) in
+            print("Handling call 1")
             switch result {
             case let .success(claims):
                 self.claimsDataSource.claims = claims
@@ -48,6 +50,25 @@ class ClaimsTableViewController: UITableViewController {
                 self.refreshControl?.endRefreshing()
             }
         }
+        
+//        print("Call 2")
+//        claimsService.retrieveClaims() { (result) in
+//            print("Handling call 2")
+//            switch result {
+//            case let .success(claims):
+//                self.claimsDataSource.claims = claims
+//
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+//                }
+//            case let .failure(error):
+//                print(error)
+//            }
+//
+//            DispatchQueue.main.async {
+//                self.refreshControl?.endRefreshing()
+//            }
+//        }
     }
     
     @objc private func handleRefresh() {

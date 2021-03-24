@@ -14,58 +14,18 @@ enum TokenError: Error {
     case invalidTokenResponse
 }
 
-class TokenOperation: Operation {
+class TokenOperation: AsyncOperation {
     typealias tokenCompletionBlock = (Result<TokenResponse, TokenError>) -> Void
     
     private let tokenEndpoint: URL
     private let parameters: [String:Any]
     private let completion: tokenCompletionBlock
     
-//    override var isAsynchronous: Bool {
-//        return true
-//    }
-    
-    private var _isExecuting: Bool = false {
-        willSet {
-            willChangeValue(forKey: "isExecuting")
-        }
-        didSet {
-            didChangeValue(forKey: "isExecuting")
-        }
-    }
-    
-    override var isExecuting: Bool {
-        return _isExecuting
-    }
-    
-    private var _isFinished: Bool = false {
-        willSet {
-            willChangeValue(forKey: "isFinished")
-        }
-        didSet {
-            didChangeValue(forKey: "isFinished")
-        }
-    }
-    
-    override var isFinished: Bool {
-        return _isFinished
-    }
-    
     override func main() {
         if !isCancelled {
             issueTokenRequest(completion: completion)
         } else {
-            _isExecuting = false
-            _isFinished = true
-        }
-    }
-    
-    override func start() {
-        if !isCancelled {
-            _isExecuting = true
-            main()
-        } else {
-            _isFinished = true
+            finish()
         }
     }
     
@@ -91,8 +51,7 @@ class TokenOperation: Operation {
         if !isCancelled {
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 defer {
-                    self._isExecuting = false
-                    self._isFinished = true
+                    self.finish()
                 }
                 if let error = error {
                     print(error)
@@ -116,8 +75,7 @@ class TokenOperation: Operation {
             
             task.resume()
         } else {
-            _isExecuting = false
-            _isFinished = true
+            finish()
         }
     }
 }

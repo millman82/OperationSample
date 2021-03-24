@@ -14,20 +14,20 @@ struct OAuthService: AuthService {
     
     private let globalPresentationAnchor: ASPresentationAnchor?
     
-    private var oauthOptions: OAuthOptions {
+    private var oAuthOptions: OAuthOptions {
         get {
             return AuthContext.shared.options
         }
     }
     
     func getToken(completion: @escaping (String) -> Void) {
-        let oauthOperation = OAuthOperation(oauthOptions: oauthOptions, globalPresentationAnchor: globalPresentationAnchor) { (token) in
+        let oAuthOperation = OAuthOperation(oAuthOptions: oAuthOptions, globalPresentationAnchor: globalPresentationAnchor) { (token) in
             if let token = token {
                 completion(token)
             }
         }
         
-        operationQueue.addOperation(oauthOperation)
+        operationQueue.addOperation(oAuthOperation)
     }
     
     init(globalPresentationAnchor: ASPresentationAnchor?)

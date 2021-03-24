@@ -10,7 +10,7 @@ import AuthenticationServices
 import CryptoKit
 import Foundation
 
-class AuthorizeOperation: Operation {
+class AuthorizeOperation: AsyncOperation {
     lazy var authorizeQueue: OperationQueue = {
         let operationQueue = OperationQueue()
         operationQueue.name = "Authorize Queue"
@@ -24,50 +24,11 @@ class AuthorizeOperation: Operation {
     private let parameters: [String:Any]
     private let globalPresentationAnchor: ASPresentationAnchor?
     
-    override var isAsynchronous: Bool {
-        return true
-    }
-    
-    private var _isExecuting: Bool = false {
-        willSet {
-            willChangeValue(forKey: "isExecuting")
-        }
-        didSet {
-            didChangeValue(forKey: "isExecuting")
-        }
-    }
-    
-    override var isExecuting: Bool {
-        return _isExecuting
-    }
-    
-    private var _isFinished: Bool = false {
-        willSet {
-            willChangeValue(forKey: "isFinished")
-        }
-        didSet {
-            didChangeValue(forKey: "isFinished")
-        }
-    }
-    
-    override var isFinished: Bool {
-        return _isFinished
-    }
-    
     override func main() {
         if !isCancelled {
             authorize()
         } else {
-            _isFinished = true
-        }
-    }
-    
-    override func start() {
-        if !isCancelled {
-            _isExecuting = true
-            main()
-        } else {
-            _isFinished = true
+            finish()
         }
     }
     
@@ -118,8 +79,7 @@ class AuthorizeOperation: Operation {
         if !isCancelled {
             let session = ASWebAuthenticationSession(url: authURL, callbackURLScheme: callbackURLScheme) { (callbackURL, error) in
                 defer {
-                    self._isExecuting = false
-                    self._isFinished = true
+                    self.finish()
                 }
                 if let error = error {
                     print(error)
@@ -137,21 +97,18 @@ class AuthorizeOperation: Operation {
                 if let code = queryItems?.filter({ $0.name == "code" }).first?.value {
                     AuthContext.shared.authorizationCode = code
                 }
-                
-                print(OperationQueue.current?.name ?? "")
             }
             
             OperationQueue.main.addOperation {
-                let oauthViewController = OAuthViewController()
-                oauthViewController.globalPresentationAnchor = ASPresentationAnchor()
-                let presentationContextProvider = oauthViewController
+                let oAuthViewController = OAuthViewController()
+                oAuthViewController.globalPresentationAnchor = ASPresentationAnchor()
+                let presentationContextProvider = oAuthViewController
                 
                 session.presentationContextProvider = presentationContextProvider
                 session.start()
             }
         } else {
-            _isExecuting = false
-            _isFinished = true
+            finish()
         }
     }
 }

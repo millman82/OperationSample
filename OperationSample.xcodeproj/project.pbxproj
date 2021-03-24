@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		270B725D24537085000E3036 /* ClaimsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270B725C24537085000E3036 /* ClaimsService.swift */; };
+		2764545C260948050038D512 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764545B260948050038D512 /* AsyncOperation.swift */; };
 		277FB12224476823006D17CF /* OAuthOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277FB12124476823006D17CF /* OAuthOptions.swift */; };
 		27983C7D2445814900F55FC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27983C7C2445814900F55FC9 /* AppDelegate.swift */; };
 		27983C7F2445814900F55FC9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27983C7E2445814900F55FC9 /* SceneDelegate.swift */; };
@@ -54,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		270B725C24537085000E3036 /* ClaimsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimsService.swift; sourceTree = "<group>"; };
+		2764545B260948050038D512 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		277FB12124476823006D17CF /* OAuthOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthOptions.swift; sourceTree = "<group>"; };
 		27983C792445814900F55FC9 /* OperationSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OperationSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27983C7C2445814900F55FC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				27D73DC62455EC20002BD70B /* AuthorizeOperation.swift */,
 				2799871A2446862A0076789C /* OAuthOperation.swift */,
 				27D73DC12454E6C1002BD70B /* TokenOperation.swift */,
+				2764545B260948050038D512 /* AsyncOperation.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				27D73DBE2453FAF5002BD70B /* OAuthViewController.swift in Sources */,
 				27D73DC92456030E002BD70B /* OAuthService.swift in Sources */,
 				2799871E244689E10076789C /* Token.swift in Sources */,
+				2764545C260948050038D512 /* AsyncOperation.swift in Sources */,
 				27D73DBB2453F5A9002BD70B /* SceneDelegate+ASWebAuthenticationSession.swift in Sources */,
 				27983C7F2445814900F55FC9 /* SceneDelegate.swift in Sources */,
 				27D73DB92453F2F8002BD70B /* TokenClient.swift in Sources */,
